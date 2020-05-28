@@ -3,7 +3,7 @@
     xmlns:facebook="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/main_layout"
-    android:background="@color/withdrawal_line"
+    android:background="@color/bg_light_gray"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >

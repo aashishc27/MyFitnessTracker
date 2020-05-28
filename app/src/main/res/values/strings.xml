@@ -2,4 +2,26 @@
     <string name="app_name">MyFitnessTracker</string>
     <string name="facebook_app_id">315210062436947</string>
     <string name="fb_login_protocol_scheme">fb315210062436947</string>
+    <string name="c_weight">Enter your current weight(Kg)</string>
+    <string name="c_height">Enter your height(cm)</string>
+    <string name="c_age">Enter your age</string>
+    <string name="c_gender">Select your gender</string>
+    <string name="c_activity">How active are you?(in week)</string>
+    <string name="c_food">Food preferences</string>
+
+    <string name="tag_male">Male</string>
+    <string name="tag_female">Female</string>
+    <string name="tag_other">Others</string>
+
+    <string name="tag_sedentory">Sedentary</string>
+    <string name="tag_light">Exercise 1–2 days</string>
+    <string name="tag_moderate">Exercise 3–5 days</string>
+    <string name="tag_heavy">Exercise 6–7 days</string>
+
+    <string name="tag_veg">Vegetarian</string>
+    <string name="tag_nonveg">Non vegetarian</string>
+    <string name="tag_egg">Eggetarian</string>
+
+
+
 </resources>
