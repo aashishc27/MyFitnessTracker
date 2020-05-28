@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+
+    <activity.ActionBar
+        android:id="@+id/action_bar"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="-2dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/action_bar"
+        android:id="@+id/header"
+        android:text="Welcome to My Fitness Tracker "
+        android:gravity="center"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:layout_marginBottom="@dimen/twenty_dp"
+        android:textColor="@color/app_color"
+        android:textSize="@dimen/twenty_dp"
+        android:layout_height="wrap_content"
+        />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_below="@+id/header"
+        android:id="@+id/sub_header"
+        android:text="Login now to start your fitness journey"
+        android:gravity="center"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:layout_marginBottom="@dimen/twenty_dp"
+        android:textColor="@color/app_color"
+        android:textSize="@dimen/twenty_dp"
+        android:layout_height="wrap_content"
+        />
+
+
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/fifty_dp"
+        android:layout_below="@+id/sub_header"
+        android:layout_centerHorizontal="true"
+         />
+    <RelativeLayout
+        android:id="@+id/seprator"
+        android:layout_below="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="@dimen/thirty_dp"
+        android:layout_marginBottom="@dimen/thirty_dp">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:layout_toRightOf="@+id/orText"
+            android:background="@color/dialog_head" />
+
+        <TextView
+            android:id="@+id/orText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="OR"
+            android:textColor="@color/dialog_head"
+            android:textSize="@dimen/fifteen_sp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_toLeftOf="@+id/orText"
+            android:background="@color/dialog_head" />
+    </RelativeLayout>
+
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/loginButton"
+        android:layout_below="@+id/seprator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:paddingBottom="10dp"
+        android:paddingTop="10dp" />
+
+</RelativeLayout>

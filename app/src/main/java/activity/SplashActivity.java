@@ -74,10 +74,10 @@ public class SplashActivity extends AppCompatActivity {
                         editor.apply();
 
                         //SplashActivity.this
-//                        Intent intent = new Intent(SplashActivity.this, TutorialScreen.class);
-//                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                        startActivity(intent);
-//                        finish();
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
+                        finish();
 
 
                     }  else {
@@ -93,10 +93,10 @@ public class SplashActivity extends AppCompatActivity {
 //                            startActivity(intent);
 //                            finish();
                         } else {
-//                            Intent intent = new Intent(SplashActivity.this, VerifyUser.class);
-//                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-//                            startActivity(intent);
-//                            finish();
+                            Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+                            finish();
                         }
 
                     }
