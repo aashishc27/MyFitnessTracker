@@ -1,9 +1,13 @@
 package activity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -15,7 +19,10 @@ import com.facebook.appevents.suggestedevents.ViewOnClickListener;
 
 import java.util.ArrayList;
 
+import helper.CommonConstants;
+import helper.DatabaseHelper;
 import helper.TagLayout;
+import helper.Util;
 
 public class DataCollectionActivity extends AppCompatActivity {
     
@@ -24,9 +31,13 @@ public class DataCollectionActivity extends AppCompatActivity {
     int idGender,idActivity,idFood;
     ArrayList<String> gender,activity_level,food_pref;
     LayoutInflater layoutInflater;
-    String selected_gender,selected_activity,selected_food;
-
+    String selected_gender,selected_activity,selected_food,user_code;
+    Button submit;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
     ActionBar actionBar;
+
+    DatabaseHelper myDb;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,18 +45,43 @@ public class DataCollectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data_collection);
         
         init();
+
+    }
+
+    void listener(){
+
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String weight = et_weight.getText().toString();
+                String height = et_weight.getText().toString();
+                String age = et_weight.getText().toString();
+
+                if(TextUtils.isEmpty(weight)||TextUtils.isEmpty(height)||TextUtils.isEmpty(age)||TextUtils.isEmpty(selected_gender)||TextUtils.isEmpty(selected_activity)||TextUtils.isEmpty(selected_food)){
+                    Util.showToast("Values are missing",DataCollectionActivity.this);
+                }
+                else{
+                    myDb.insertData(user_code,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_activity,selected_food);
+                }
+            }
+        });
     }
     
     void init(){
         layoutInflater = getLayoutInflater();
         String tag;
 
+        myDb = new DatabaseHelper(this);
+
         actionBar = findViewById(R.id.action_bar);
 
         actionBar.setLeftTitle("Tell us about yourself");
         actionBar.setBackButtonDrawable();
 
+        sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
+        user_code = sharedPreferences.getString(CommonConstants.USER_CODE,"");
         tg_gender = findViewById(R.id.tl_gender);
         tg_activity = findViewById(R.id.tl_activity);
         tg_food = findViewById(R.id.tl_food);

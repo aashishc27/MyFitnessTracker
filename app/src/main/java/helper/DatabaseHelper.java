@@ -9,14 +9,16 @@ import android.widget.Toast;
 
 
 public class DatabaseHelper extends SQLiteOpenHelper {
-    public static final String DATABASE_NAME = "Document.db";
+    public static final String DATABASE_NAME = "Profile.db";
     public static final String TABLE_NAME = "selected_documents";
     public static final String COL_1 = "id";
-    public static final String COL_2 = "category";
-    public static final String COL_3 = "type";
-    public static final String COL_4 = "path";
-    public static final String COL_5 = "loan_code";
-    public static final String COL_6 = "password";
+    public static final String COL_2 = "user_code";
+    public static final String COL_3 = "weight";
+    public static final String COL_4 = "height";
+    public static final String COL_5 = "age";
+    public static final String COL_6 = "gender";
+    public static final String COL_7 = "activity";
+    public static final String COL_8 = "food";
     Context context;
 
     public DatabaseHelper(Context context) {
@@ -26,7 +28,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("create table " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT,category TEXT,type TEXT,path TEXT UNIQUE,loan_code TEXT,password TEXT)");
+        db.execSQL("create table " + TABLE_NAME + " (id INTEGER PRIMARY KEY AUTOINCREMENT,user_code TEXT,weight TEXT,height TEXT,age TEXT,gender TEXT,activity TEXT,food TEXT)");
     }
 
     @Override
@@ -35,14 +37,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean insertData(String loan_code, String category, String type, String path, int isPasswordProtected) {
+    public boolean insertData(String user_code,String weight, String height, String age, String gender, String activity,String food) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues contentValues = new ContentValues();
 
-        contentValues.put(COL_2, category);
-        contentValues.put(COL_3, type);
-        contentValues.put(COL_4, path);
-        contentValues.put(COL_5, loan_code);
+        contentValues.put(COL_2,user_code);
+        contentValues.put(COL_3, weight);
+        contentValues.put(COL_4, height);
+        contentValues.put(COL_5, age);
+        contentValues.put(COL_6, gender);
+        contentValues.put(COL_7, activity);
+        contentValues.put(COL_8, food);
         long result = db.insert(TABLE_NAME, null, contentValues);
         if (result == -1) {
             Util.showToast("Document already selected", context);
