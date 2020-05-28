@@ -1,6 +1,8 @@
 package activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -28,6 +30,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import helper.CommonConstants;
 import helper.Util;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
@@ -41,6 +44,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private LoginButton loginButton;
     private CallbackManager callbackManager;
+
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -62,6 +68,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton = (LoginButton) findViewById(R.id.loginButton);
         loginButton.setText("Login Via Facebook");
 
+        sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
+
 
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -70,7 +79,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Util.showToast("Login Sucess",LoginActivity.this);
+                openCollectData();
             }
 
             @Override
@@ -83,6 +92,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Toast.makeText(getApplicationContext(), "Something went wrong", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    void openCollectData(){
+        Util.showToast("Login Success",LoginActivity.this);
+        editor.putBoolean(CommonConstants.IS_LOGIN,true);
+        editor.apply();
+
+        Intent intent = new Intent(LoginActivity.this,DataCollectionActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+
     }
 
     @Override
@@ -168,7 +188,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     private void onSignIn(GoogleSignInAccount account) {
-        Util.showToast("Login Sucess",LoginActivity.this);
+        openCollectData();
+        account.getDisplayName();
+        account.getEmail();
+
 //        final GamesClient gamesClient = Games.getGamesClient(this, account);
 //        gamesClient.setViewForPopups(findViewById(android.R.id.content));
 //        gamesClient.setGravityForPopups(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
