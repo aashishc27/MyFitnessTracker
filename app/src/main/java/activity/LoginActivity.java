@@ -66,7 +66,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.loginButton);
-        loginButton.setText("Login Via Facebook");
 
         sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
