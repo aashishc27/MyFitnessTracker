@@ -305,9 +305,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         openCollectData();
         account.getDisplayName();
         account.getEmail();
-
-//        final GamesClient gamesClient = Games.getGamesClient(this, account);
-//        gamesClient.setViewForPopups(findViewById(android.R.id.content));
-//        gamesClient.setGravityForPopups(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
     }
 }
