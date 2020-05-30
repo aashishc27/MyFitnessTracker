@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">MyFitnessTracker</string>
-    <string name="facebook_app_id">315210062436947</string>
-    <string name="fb_login_protocol_scheme">fb315210062436947</string>
+    <string name="facebook_app_id">1102127206825629</string>
+    <string name="fb_login_protocol_scheme">fb1102127206825629</string>
     <string name="c_weight">Enter your current weight(Kg)</string>
     <string name="c_height">Enter your height(cm)</string>
     <string name="c_age">Enter your age</string>
@@ -21,6 +21,13 @@
     <string name="tag_veg">Vegetarian</string>
     <string name="tag_nonveg">Non vegetarian</string>
     <string name="tag_egg">Eggetarian</string>
+    <string name="name_id_token_activity">IdTokenActivity</string>
+
+
+    <!-- TODO(user): replace with your real server client ID -->
+    <!-- Server Client ID.  This should be a valid Web OAuth 2.0 Client ID obtained
+         from https://console.developers.google.com/ -->
+    <string name="server_client_id">676573042257-e5rlpf7jjn39gq8q49s90v1ohsrl3dqk.apps.googleusercontent.com</string>
 
 
 

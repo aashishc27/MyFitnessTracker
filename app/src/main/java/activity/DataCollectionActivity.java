@@ -75,11 +75,20 @@ public class DataCollectionActivity extends AppCompatActivity {
 
         actionBar = findViewById(R.id.action_bar);
 
-        actionBar.setLeftTitle("Tell us about yourself");
-        actionBar.setBackButtonDrawable();
-
         sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
+        String name =sharedPreferences.getString(CommonConstants.USER_NAME,"");
+
+        if(TextUtils.isEmpty(name)){
+            actionBar.setLeftTitle("Tell us about yourself");
+        }else{
+            actionBar.setLeftTitle("Welcome "+ sharedPreferences.getString(CommonConstants.USER_NAME,""));
+
+        }
+
+        actionBar.setBackButtonDrawable();
+
 
         user_code = sharedPreferences.getString(CommonConstants.USER_CODE,"");
         tg_gender = findViewById(R.id.tl_gender);
@@ -94,7 +103,11 @@ public class DataCollectionActivity extends AppCompatActivity {
         idActivity = tg_activity.getId();
         idFood = tg_food.getId();
 
+        int age =sharedPreferences.getInt(CommonConstants.USER_AGE,0);
 
+        if(age>1){
+            et_age.setText(age+"");
+        }
 
         gender = new ArrayList<>();
         activity_level = new ArrayList<>();
@@ -104,8 +117,7 @@ public class DataCollectionActivity extends AppCompatActivity {
         activity_level.add(getResources().getString(R.string.tag_light));
         activity_level.add(getResources().getString(R.string.tag_moderate));
         activity_level.add(getResources().getString(R.string.tag_heavy));
-        activity_level.add(getResources().getString(R.string.tag_heavy));
-        
+
         gender.add(getResources().getString(R.string.tag_male));
         gender.add(getResources().getString(R.string.tag_female));
         gender.add(getResources().getString(R.string.tag_other));

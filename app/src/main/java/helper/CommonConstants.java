@@ -17,6 +17,12 @@ public class CommonConstants {
 
     public static final String IN_APP_REJECTED = "IN_APP_REJECTED";
 
+    public static final String USER_EMAIL = "USER_EMAIL";
+    public static final String USER_NAME = "USER_NAME";
+    public static final String USER_BIRTHDAY = "USER_BIRTHDAY";
+    public static final String USER_AGE = "USER_AGE";
+
+
 
 
 
