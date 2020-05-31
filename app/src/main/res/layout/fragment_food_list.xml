@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:text="Select Protein you like:"
+        android:textSize="@dimen/twenty_sp"
+        android:textStyle="bold"
+        android:id="@+id/tv_food_type"
+        android:textColor="@color/app_color"
+        />
+    <ListView
+        android:id="@+id/lv_food"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/tv_food_type"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/twenty_dp"
+        android:layout_above="@+id/submit"
+        android:divider="@color/black"
+        android:dividerHeight="1dp"
+        android:visibility="visible"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:layout_height="wrap_content"
+        android:background="@color/app_color"
+        android:id="@+id/submit"
+        android:layout_margin="@dimen/thirty_dp"
+        android:text="Submit"
+        android:textAllCaps="false"
+        />
+
+</RelativeLayout>

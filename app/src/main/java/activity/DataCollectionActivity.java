@@ -1,6 +1,7 @@
 package activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -45,7 +46,7 @@ public class DataCollectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data_collection);
         
         init();
-
+        listener();
     }
 
     void listener(){
@@ -61,7 +62,9 @@ public class DataCollectionActivity extends AppCompatActivity {
                     Util.showToast("Values are missing",DataCollectionActivity.this);
                 }
                 else{
-                    myDb.insertData(user_code,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_activity,selected_food);
+                   // myDb.insertData(user_code,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_activity,selected_food);
+                    Intent intent = new Intent(DataCollectionActivity.this,FoodItemSelection.class);
+                    startActivity(intent);
                 }
             }
         });

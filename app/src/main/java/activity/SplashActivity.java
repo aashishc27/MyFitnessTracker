@@ -10,11 +10,27 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.example.myfitnesstracker.R;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.w3c.dom.Comment;
+
+import java.util.ArrayList;
 
 import helper.CommonConstants;
 import helper.Util;
+import models.FoodItemModel;
 
 public class SplashActivity extends AppCompatActivity {
 
@@ -26,6 +42,8 @@ public class SplashActivity extends AppCompatActivity {
     SharedPreferences.Editor editor;
     PackageManager manager;
     PackageInfo info;
+    private DatabaseReference mPostReference;
+
 
     @Override
     protected void onResume() {
@@ -120,6 +138,8 @@ public class SplashActivity extends AppCompatActivity {
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }
+
+
 
     }
 

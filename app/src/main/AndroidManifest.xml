@@ -39,6 +39,10 @@
             android:screenOrientation="portrait"
             android:theme="@style/ActivityTheme"
             android:windowSoftInputMode="stateHidden" />
+        <activity android:name="activity.FoodItemSelection"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme"
+            android:windowSoftInputMode="stateHidden" />
 
         <activity
             android:name="activity.IDTokenActivity"
