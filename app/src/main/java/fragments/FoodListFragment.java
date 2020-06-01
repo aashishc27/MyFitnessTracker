@@ -24,6 +24,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
+import activity.DietChartActivity;
 import activity.FoodItemSelection;
 import adapter.FoodListAdapter;
 import helper.CommonConstants;
@@ -206,7 +207,9 @@ public class FoodListFragment extends Fragment {
                         intent.putExtra("screen",screen);
                         startActivity(intent);
                     }else{
-
+                        Intent intent = new Intent(getActivity(), DietChartActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                     }
                 }else{
                     Util.showToast("No Items Selected",getActivity());
