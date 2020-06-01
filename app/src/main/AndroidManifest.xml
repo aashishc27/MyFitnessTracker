@@ -35,6 +35,12 @@
             android:windowDisablePreview="true"
             android:windowSoftInputMode="adjustResize" />
 
+        <activity android:name="activity.DietChartActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme"
+            android:windowDisablePreview="true"
+            android:windowSoftInputMode="adjustResize" />
+
         <activity android:name="activity.DataCollectionActivity"
             android:screenOrientation="portrait"
             android:theme="@style/ActivityTheme"

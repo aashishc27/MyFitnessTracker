@@ -40,19 +40,21 @@
         android:textSize="@dimen/twenty_dp"
         android:layout_height="wrap_content"
         />
-
-
-    <com.google.android.gms.common.SignInButton
-        android:id="@+id/sign_in_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/fifty_dp"
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/loginButton"
+        facebook:com_facebook_login_text="Login via Facebook"
         android:layout_below="@+id/sub_header"
+        android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
-         />
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp"
+        android:layout_marginTop="@dimen/fifty_dp"
+        android:paddingTop="10dp" />
+
+
     <RelativeLayout
         android:id="@+id/seprator"
-        android:layout_below="@+id/sign_in_button"
+        android:layout_below="@+id/loginButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|center_horizontal"
@@ -88,15 +90,13 @@
             android:background="@color/dialog_head" />
     </RelativeLayout>
 
-
-    <com.facebook.login.widget.LoginButton
-        android:id="@+id/loginButton"
-        facebook:com_facebook_login_text="Login via Facebook"
-        android:layout_below="@+id/seprator"
+    <com.google.android.gms.common.SignInButton
+        android:id="@+id/sign_in_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
-        android:paddingBottom="10dp"
-        android:paddingTop="10dp" />
+        android:layout_below="@+id/seprator"
+        />
+
 
 </RelativeLayout>

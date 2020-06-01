@@ -7,6 +7,7 @@
     <string name="c_age">Enter your age</string>
     <string name="c_gender">Select your gender</string>
     <string name="c_activity">How active are you?(in week)</string>
+    <string name="c_goals">Goals</string>
     <string name="c_food">Food preferences</string>
 
     <string name="tag_male">Male</string>
@@ -17,6 +18,9 @@
     <string name="tag_light">Exercise 1–2 days</string>
     <string name="tag_moderate">Exercise 3–5 days</string>
     <string name="tag_heavy">Exercise 6–7 days</string>
+
+    <string name="tag_fat_loss">Fat Loss</string>
+    <string name="tag_muscle_gain">Muscle Gain</string>
 
     <string name="tag_veg">Vegetarian</string>
     <string name="tag_nonveg">Non vegetarian</string>

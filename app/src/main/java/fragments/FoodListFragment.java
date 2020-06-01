@@ -1,7 +1,10 @@
 package fragments;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,11 +17,17 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.example.myfitnesstracker.R;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.List;
 
 import activity.FoodItemSelection;
 import adapter.FoodListAdapter;
+import helper.CommonConstants;
+import helper.Util;
 import models.FoodModel;
 
 public class FoodListFragment extends Fragment {
@@ -34,11 +43,58 @@ public class FoodListFragment extends Fragment {
     Button submit;
     int screen ;
 
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+
 
     public FoodListFragment(ArrayList<FoodModel> productList,String type,int screen) {
         this.productList = productList;
         this.type = type;
         this.screen = screen;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        Gson gson = new Gson();
+        String json = "" ;
+        if(screen ==1){
+            json = sharedPreferences.getString(CommonConstants.SELCTED_PROTEIN, "");
+        }else if(screen ==2){
+            json = sharedPreferences.getString(CommonConstants.SELCTED_CARBS, "");
+        }else if(screen ==3){
+            json = sharedPreferences.getString(CommonConstants.SELCTED_FATS, "");
+        }
+        Type type = new TypeToken<ArrayList<FoodModel>>(){}.getType();
+
+        ArrayList<FoodModel> selectedList = gson.fromJson(json, type);
+
+        if(selectedList != null){
+            for(int i = 0;i<productList.size();i++){
+                for(int j = 0;j<selectedList.size();j++){
+                    if(selectedList.get(j).getName().equalsIgnoreCase(productList.get(i).getName())){
+                        productList.get(i).setSelected(true);
+                    }
+                }
+            }
+        }
+
+        for(int i = 0;i<productList.size();i++){
+            if(productList.get(i).isSelected()){
+                FoodModel foodModel =new FoodModel();
+                foodModel.setName(productList.get(i).getName());
+                foodModel.setSelected(productList.get(i).isSelected());
+
+                selectedproductList.add(foodModel);
+            }
+        }
+
+
+
+            foodListAdapter = new FoodListAdapter(getActivity(), productList, uncheckproductList, tv_food_header, lv_food);
+            lv_food.setAdapter(foodListAdapter);
+
     }
 
     @Override
@@ -68,9 +124,10 @@ public class FoodListFragment extends Fragment {
 
         submit = view.findViewById(R.id.submit);
 
+        sharedPreferences = getActivity().getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
+        editor = sharedPreferences.edit();
 
-        foodListAdapter = new FoodListAdapter(getActivity(), productList, uncheckproductList, tv_food_header, lv_food);
-        lv_food.setAdapter(foodListAdapter);
+
 
     }
 
@@ -129,10 +186,33 @@ public class FoodListFragment extends Fragment {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                screen = screen+1;
-                Intent intent = new Intent(getActivity(), FoodItemSelection.class);
-                intent.putExtra("screen",screen);
-                startActivity(intent);
+
+                if(selectedproductList.size()>0){
+                    Gson gson = new Gson();
+                    if(screen == 1){
+                        String json = gson.toJson(selectedproductList);
+                        editor.putString(CommonConstants.SELCTED_PROTEIN,json);
+                    }else if(screen == 2){
+                        String json = gson.toJson(selectedproductList);
+                        editor.putString(CommonConstants.SELCTED_CARBS,json);
+                    }else if(screen == 3){
+                        String json = gson.toJson(selectedproductList);
+                        editor.putString(CommonConstants.SELCTED_FATS,json);
+                    }
+                    editor.apply();
+                    screen = screen+1;
+                    if(screen <4){
+                        Intent intent = new Intent(getActivity(), FoodItemSelection.class);
+                        intent.putExtra("screen",screen);
+                        startActivity(intent);
+                    }else{
+
+                    }
+                }else{
+                    Util.showToast("No Items Selected",getActivity());
+                }
+
+
             }
         });
     }

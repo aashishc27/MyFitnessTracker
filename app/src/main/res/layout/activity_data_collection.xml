@@ -33,6 +33,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
+                android:inputType="number"
                 android:maxLines="1"
                 android:layout_marginLeft="@dimen/fifteen_dp"
                 android:layout_marginRight="@dimen/fifteen_dp"
@@ -53,6 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/fifteen_dp"
+                android:inputType="number"
                 android:singleLine="true"
                 android:maxLines="1"
                 android:layout_marginRight="@dimen/fifteen_dp"
@@ -76,6 +78,7 @@
                 android:layout_marginRight="@dimen/fifteen_dp"
                 android:singleLine="true"
                 android:maxLines="1"
+                android:inputType="number"
                 android:textColor="@color/black"
                 android:id="@+id/et_age"
                 android:hint="Ex 25"
@@ -125,8 +128,23 @@
                 android:id="@+id/tl_food"
                 android:layout_marginLeft="@dimen/twelve_dp"
                 android:layout_width="match_parent"
-                android:layout_marginBottom="@dimen/fifty_dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ten_dp" />
+            <TextView
+                android:layout_width="match_parent"
+                android:textColor="@color/app_color"
+                android:layout_marginTop="@dimen/five_dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/fifteen_dp"
+                android:layout_marginRight="@dimen/fifteen_dp"
+                android:text="@string/c_goals"
+                />
+            <helper.TagLayout
+                android:id="@+id/tl_goals"
+                android:layout_marginLeft="@dimen/twelve_dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/fifty_dp"
                 android:layout_marginTop="@dimen/ten_dp" />
 
         </LinearLayout>

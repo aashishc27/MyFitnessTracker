@@ -3,6 +3,7 @@ package activity;
 import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.widget.FrameLayout;
 
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import fragments.FoodListFragment;
+import helper.DatabaseHelper;
 import models.FoodItemModel;
 import models.FoodModel;
 
@@ -29,9 +31,15 @@ public class FoodItemSelection extends AppCompatActivity {
     ArrayList<String> carbs,fats,protein;
     ArrayList<FoodModel> food_list;
     ActionBar actionBar;
+    String food_pref;
     int screen;
+    DatabaseHelper myDb;
 
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -40,11 +48,17 @@ public class FoodItemSelection extends AppCompatActivity {
         food_list = new ArrayList<>();
         Intent intent = getIntent();
         screen = intent.getIntExtra("screen",1);
+        food_pref = intent.getStringExtra("food_pref");
+
         actionBar = findViewById(R.id.action_bar);
 
         actionBar.setLeftTitle("Food Selector");
 
         protein = new ArrayList<>();
+
+        myDb = new DatabaseHelper(this);
+
+
 
         // Write a message to the database
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -59,8 +73,12 @@ public class FoodItemSelection extends AppCompatActivity {
                 carbs = post.getCarbs();
                 fats = post.getFats();
                 for(int i = 0;i<post.getProtein().size();i++){
-                    protein.add(post.getProtein().get(i).getVal());
+                    if(!TextUtils.isEmpty(food_pref)&&food_pref.equalsIgnoreCase(post.getProtein().get(i).getType())){
+                        protein.add(post.getProtein().get(i).getVal());
+                    }
+
                 }
+
 
                 System.out.println(post);
 

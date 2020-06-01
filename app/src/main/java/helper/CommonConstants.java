@@ -23,6 +23,10 @@ public class CommonConstants {
     public static final String USER_AGE = "USER_AGE";
 
 
+    public static final String SELCTED_PROTEIN = "SELCTED_PROTEIN";
+    public static final String SELCTED_CARBS = "SELCTED_CARBS";
+    public static final String SELCTED_FATS = "SELCTED_FATS";
+
 
 
 

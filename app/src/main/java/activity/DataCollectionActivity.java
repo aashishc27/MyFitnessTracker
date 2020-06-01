@@ -3,6 +3,7 @@ package activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
@@ -16,7 +17,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myfitnesstracker.R;
-import com.facebook.appevents.suggestedevents.ViewOnClickListener;
 
 import java.util.ArrayList;
 
@@ -27,12 +27,12 @@ import helper.Util;
 
 public class DataCollectionActivity extends AppCompatActivity {
     
-    TagLayout tg_gender,tg_activity,tg_food;
+    TagLayout tg_gender,tg_activity,tg_food, tg_goals;
     EditText et_weight,et_height,et_age;
-    int idGender,idActivity,idFood;
-    ArrayList<String> gender,activity_level,food_pref;
+    int idGender,idActivity,idFood,idGoals;
+    ArrayList<String> gender,activity_level,food_pref,fitness_goals;
     LayoutInflater layoutInflater;
-    String selected_gender,selected_activity,selected_food,user_code;
+    String selected_gender,selected_activity,selected_food,user_code,selected_goal;
     Button submit;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -49,6 +49,12 @@ public class DataCollectionActivity extends AppCompatActivity {
         listener();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        getAllSavedData();
+    }
+
     void listener(){
 
         submit.setOnClickListener(new View.OnClickListener() {
@@ -58,16 +64,113 @@ public class DataCollectionActivity extends AppCompatActivity {
                 String height = et_weight.getText().toString();
                 String age = et_weight.getText().toString();
 
-                if(TextUtils.isEmpty(weight)||TextUtils.isEmpty(height)||TextUtils.isEmpty(age)||TextUtils.isEmpty(selected_gender)||TextUtils.isEmpty(selected_activity)||TextUtils.isEmpty(selected_food)){
+                if(TextUtils.isEmpty(weight)||TextUtils.isEmpty(height)||TextUtils.isEmpty(age)||TextUtils.isEmpty(selected_gender)||TextUtils.isEmpty(selected_activity)||TextUtils.isEmpty(selected_food)||TextUtils.isEmpty(selected_goal)){
                     Util.showToast("Values are missing",DataCollectionActivity.this);
                 }
                 else{
-                   // myDb.insertData(user_code,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_activity,selected_food);
+                    myDb.insertData(user_code,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_activity,selected_food,selected_goal);
                     Intent intent = new Intent(DataCollectionActivity.this,FoodItemSelection.class);
+                    intent.putExtra("food_pref",selected_food);
                     startActivity(intent);
                 }
             }
         });
+    }
+
+    void getAllSavedData() {
+        Cursor res = myDb.getAllData();
+
+
+        while (res.moveToNext()) {
+            et_weight.setText(res.getString(1));
+            et_height.setText(res.getString(2));
+            et_age.setText(res.getString(3));
+            selected_gender = res.getString(4);
+            selected_activity = res.getString(5);
+            selected_food = res.getString(6);
+            selected_goal = res.getString(7);
+
+            prefillData();
+//            if(TextUtils.isEmpty(res.getString(2))||TextUtils.isEmpty(res.getString(3))||TextUtils.isEmpty(res.getString(4))||TextUtils.isEmpty(selected_gender)||TextUtils.isEmpty(selected_activity)||TextUtils.isEmpty(selected_food)){
+//                prefillData();
+//            }
+//            else{
+//                Intent intent = new Intent(DataCollectionActivity.this,FoodItemSelection.class);
+//                intent.putExtra("food_pref",selected_food);
+//                startActivity(intent);
+//            }
+
+
+        }
+    }
+
+
+    void prefillData(){
+        if (!selected_gender.equals("") && gender.indexOf(selected_gender) != -1) {
+
+            for (int j = 0; j < gender.size(); j++) {
+
+                TextView genderChild = tg_gender.getChildAt(j).findViewById(R.id.tagTextView);
+                genderChild.setBackground(getResources().getDrawable(R.drawable.unselected_tag));
+                genderChild.setTextColor(getResources().getColor(R.color.unselected_tag_color));
+
+            }
+
+            tg_gender.setTag(gender.indexOf(selected_gender));
+            TextView genderChild = tg_gender.getChildAt((Integer) tg_gender.getTag()).findViewById(R.id.tagTextView);
+            genderChild.setBackground(getResources().getDrawable(R.drawable.selected_tag));
+            genderChild.setTextColor(getResources().getColor(R.color.white));
+
+        }
+        if (!selected_activity.equals("") && activity_level.indexOf(selected_activity) != -1) {
+
+            for (int j = 0; j < activity_level.size(); j++) {
+
+                TextView genderChild = tg_activity.getChildAt(j).findViewById(R.id.tagTextView);
+                genderChild.setBackground(getResources().getDrawable(R.drawable.unselected_tag));
+                genderChild.setTextColor(getResources().getColor(R.color.unselected_tag_color));
+
+            }
+
+            tg_activity.setTag(activity_level.indexOf(selected_activity));
+            TextView genderChild = tg_activity.getChildAt((Integer) tg_activity.getTag()).findViewById(R.id.tagTextView);
+            genderChild.setBackground(getResources().getDrawable(R.drawable.selected_tag));
+            genderChild.setTextColor(getResources().getColor(R.color.white));
+
+        }
+        if (!selected_food.equals("") && food_pref.indexOf(selected_food) != -1) {
+
+            for (int j = 0; j < food_pref.size(); j++) {
+
+                TextView genderChild = tg_food.getChildAt(j).findViewById(R.id.tagTextView);
+                genderChild.setBackground(getResources().getDrawable(R.drawable.unselected_tag));
+                genderChild.setTextColor(getResources().getColor(R.color.unselected_tag_color));
+
+            }
+
+            tg_food.setTag(food_pref.indexOf(selected_food));
+            TextView genderChild = tg_food.getChildAt((Integer) tg_food.getTag()).findViewById(R.id.tagTextView);
+            genderChild.setBackground(getResources().getDrawable(R.drawable.selected_tag));
+            genderChild.setTextColor(getResources().getColor(R.color.white));
+
+        }
+        if (!selected_goal.equals("") && fitness_goals.indexOf(selected_goal) != -1) {
+
+            for (int j = 0; j < fitness_goals.size(); j++) {
+
+                TextView genderChild = tg_goals.getChildAt(j).findViewById(R.id.tagTextView);
+                genderChild.setBackground(getResources().getDrawable(R.drawable.unselected_tag));
+                genderChild.setTextColor(getResources().getColor(R.color.unselected_tag_color));
+
+            }
+
+            tg_goals.setTag(fitness_goals.indexOf(selected_goal));
+            TextView genderChild = tg_goals.getChildAt((Integer) tg_goals.getTag()).findViewById(R.id.tagTextView);
+            genderChild.setBackground(getResources().getDrawable(R.drawable.selected_tag));
+            genderChild.setTextColor(getResources().getColor(R.color.white));
+
+        }
+
     }
     
     void init(){
@@ -76,10 +179,13 @@ public class DataCollectionActivity extends AppCompatActivity {
 
         myDb = new DatabaseHelper(this);
 
+
         actionBar = findViewById(R.id.action_bar);
 
         sharedPreferences = getSharedPreferences("UserDetails", Context.MODE_PRIVATE);
         editor = sharedPreferences.edit();
+
+        submit = findViewById(R.id.submit);
 
         String name =sharedPreferences.getString(CommonConstants.USER_NAME,"");
 
@@ -97,6 +203,7 @@ public class DataCollectionActivity extends AppCompatActivity {
         tg_gender = findViewById(R.id.tl_gender);
         tg_activity = findViewById(R.id.tl_activity);
         tg_food = findViewById(R.id.tl_food);
+        tg_goals = findViewById(R.id.tl_goals);
 
         et_age = findViewById(R.id.et_age);
         et_height = findViewById(R.id.et_height);
@@ -105,6 +212,7 @@ public class DataCollectionActivity extends AppCompatActivity {
         idGender = tg_gender.getId();
         idActivity = tg_activity.getId();
         idFood = tg_food.getId();
+        idGoals = tg_goals.getId();
 
         int age =sharedPreferences.getInt(CommonConstants.USER_AGE,0);
 
@@ -115,6 +223,7 @@ public class DataCollectionActivity extends AppCompatActivity {
         gender = new ArrayList<>();
         activity_level = new ArrayList<>();
         food_pref = new ArrayList<>();
+        fitness_goals = new ArrayList<>();
 
         activity_level.add(getResources().getString(R.string.tag_sedentory));
         activity_level.add(getResources().getString(R.string.tag_light));
@@ -128,6 +237,13 @@ public class DataCollectionActivity extends AppCompatActivity {
         food_pref.add(getResources().getString(R.string.tag_veg));
         food_pref.add(getResources().getString(R.string.tag_nonveg));
         food_pref.add(getResources().getString(R.string.tag_egg));
+
+        fitness_goals.add(getResources().getString(R.string.tag_fat_loss));
+        fitness_goals.add(getResources().getString(R.string.tag_muscle_gain));
+
+
+
+
 
         for (int i = 0; i < gender.size(); i++) {
 
@@ -159,6 +275,17 @@ public class DataCollectionActivity extends AppCompatActivity {
             tagTextView.setText(tag);
             tg_food.addView(tagView);
         }
+        for (int i = 0; i < fitness_goals.size(); i++) {
+
+            View tagView = layoutInflater.inflate(R.layout.tag_item, null, false);
+
+            TextView tagTextView = tagView.findViewById(R.id.tagTextView);
+
+            tag = fitness_goals.get(i);
+            tagTextView.setText(tag);
+            tg_goals.addView(tagView);
+        }
+
         TagLayout.initClickListener(listener);
     }
 
@@ -170,7 +297,7 @@ public class DataCollectionActivity extends AppCompatActivity {
             int val = tg_gender.getChildCount();
             int val2 = tg_activity.getChildCount();
             int val3 = tg_food.getChildCount();
-
+            int val4 = tg_goals.getChildCount();
 
             String selected = "";
             TextView tv;
@@ -246,6 +373,29 @@ public class DataCollectionActivity extends AppCompatActivity {
 
                 }
             }
+            else if(id == idGoals){
+                for (int j = 0; j < val4; j++) {
+
+                    if (v.getTag() != null) {
+                        if (j != (Integer) v.getTag()) {
+                            tv = tg_goals.getChildAt(j).findViewById(R.id.tagTextView);
+                            tv.setBackground(getResources().getDrawable(R.drawable.unselected_tag));
+                            tv.setTextColor(getResources().getColor(R.color.unselected_tag_color));
+
+                        } else {
+
+                            tv = tg_goals.getChildAt((Integer) v.getTag()).findViewById(R.id.tagTextView);
+                            tv.setBackground(getResources().getDrawable(R.drawable.selected_tag));
+                            selected = tv.getText().toString();
+                            tv.setTextColor(getResources().getColor(R.color.white));
+                            selected_goal = selected;
+
+                        }
+                    }
+
+                }
+            }
+
 
 
         }
