@@ -46,6 +46,7 @@ public class DataCollectionActivity extends AppCompatActivity {
         setContentView(R.layout.activity_data_collection);
         
         init();
+
         listener();
     }
 
@@ -292,6 +293,8 @@ public class DataCollectionActivity extends AppCompatActivity {
     View.OnClickListener listener = new View.OnClickListener(){
         @Override
         public void onClick(View v) {
+
+            Util.closeKeyBoard(DataCollectionActivity.this);
 
             int id = ((ViewGroup) v.getParent()).getId();
             int val = tg_gender.getChildCount();

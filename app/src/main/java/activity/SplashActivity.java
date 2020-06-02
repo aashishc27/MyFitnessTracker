@@ -106,7 +106,7 @@ public class SplashActivity extends AppCompatActivity {
                         if (isLoggedIn) {
 
                             //open dashboard
-                            Intent intent = new Intent(SplashActivity.this, DataCollectionActivity.class);
+                            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
