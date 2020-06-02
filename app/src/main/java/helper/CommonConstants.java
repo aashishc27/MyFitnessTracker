@@ -22,6 +22,8 @@ public class CommonConstants {
     public static final String USER_BIRTHDAY = "USER_BIRTHDAY";
     public static final String USER_AGE = "USER_AGE";
 
+    public static final String PLAN_GENERATED = "PLAN_GENERATED";
+
 
     public static final String SELCTED_PROTEIN = "SELCTED_PROTEIN";
     public static final String SELCTED_CARBS = "SELCTED_CARBS";

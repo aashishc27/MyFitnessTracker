@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/ten_dp"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Chicken"
+                android:id="@+id/food_name"
+                android:textColor="@color/app_color_dark"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="200 gm"
+                android:id="@+id/portion_size"
+                android:textColor="@color/app_color_dark"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:id="@+id/calories"
+            android:layout_weight="1"
+            android:layout_gravity="center"
+            android:gravity="right"
+            android:layout_height="wrap_content"
+            android:textColor="@color/app_color_dark"
+            android:text="200 cal"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>

@@ -210,6 +210,7 @@ public class FoodListFragment extends Fragment {
                         Intent intent = new Intent(getActivity(), DietChartActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
+                        getActivity().finish();
                     }
                 }else{
                     Util.showToast("No Items Selected",getActivity());

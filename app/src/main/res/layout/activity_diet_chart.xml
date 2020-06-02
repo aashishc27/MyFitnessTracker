@@ -1,6 +1,201 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/animationView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_rawRes="@raw/food_anim"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:visibility="gone"
+        android:id="@+id/mainView"
+        android:layout_height="match_parent">
+        <activity.ActionBar
+            android:id="@+id/action_bar"
+            android:layout_width="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="-2dp" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_below="@+id/action_bar"
+            android:fillViewport="true"
+            android:layout_above="@+id/go_dashboard"
+            android:layout_height="match_parent">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_total_cal"
+                    android:layout_marginLeft="@dimen/twenty_dp"
+                    android:layout_marginTop="@dimen/twenty_dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/twenty_sp"
+                        android:textColor="@color/app_color"
+                        android:text="Total Calories : "
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:id="@+id/cal_calories"
+                        android:text="-"
+                        />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_total_bmi"
+                    android:layout_marginLeft="@dimen/twenty_dp"
+                    android:layout_below="@+id/ll_total_cal"
+                    android:layout_marginTop="@dimen/twenty_dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/twenty_sp"
+                        android:textColor="@color/app_color"
+                        android:text="BMI Score : "
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/black"
+                        android:id="@+id/cal_bmi"
+                        android:text="-"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="horizontal"
+                    android:id="@+id/ll_total_steps"
+                    android:visibility="gone"
+                    android:layout_marginLeft="@dimen/twenty_dp"
+                    android:layout_below="@+id/ll_total_bmi"
+                    android:layout_marginTop="@dimen/twenty_dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/twenty_sp"
+                        android:textColor="@color/app_color"
+                        android:text="Total Steps : "
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="-"
+                        />
+                </LinearLayout>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/twenty_sp"
+                    android:id="@+id/meal_header"
+                    android:layout_marginLeft="@dimen/twenty_dp"
+                    android:layout_marginTop="@dimen/twenty_dp"
+                    android:layout_below="@id/ll_total_steps"
+                    android:textColor="@color/app_color"
+                    android:text="Calculated Meal Plan "
+                    />
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/ll_break"
+                    android:layout_marginRight="@dimen/twenty_dp"
+                    android:layout_below="@+id/meal_header"
+                    android:layout_marginLeft="@dimen/twenty_dp"
+                    android:layout_marginTop="@dimen/twenty_dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/sixteen_sp"
+                        android:textColor="@color/app_color"
+                        android:text="Breakfast"
+                        />
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:id="@+id/lv_break"
+                        android:layout_height="100dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/ll_lunch"
+                    android:layout_below="@+id/ll_break"
+                    android:layout_marginRight="@dimen/twenty_dp"
+                    android:layout_marginLeft="@dimen/twenty_dp"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sixteen_sp"
+                        android:textColor="@color/app_color"
+                        android:textStyle="bold"
+                        android:text="Lunch"
+                        />
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:id="@+id/lv_lunch"
+                        android:layout_height="100dp"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:id="@+id/ll_dinner"
+                    android:layout_below="@+id/ll_lunch"
+                    android:layout_marginRight="@dimen/twenty_dp"
+                    android:layout_marginLeft="@dimen/twenty_dp"
+                    android:layout_marginTop="@dimen/ten_dp"
+                    android:layout_height="wrap_content">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="@dimen/sixteen_sp"
+                        android:textColor="@color/app_color"
+                        android:text="Dinner"
+                        android:textStyle="bold"
+                        />
+                    <ListView
+                        android:layout_width="match_parent"
+                        android:id="@+id/lv_dinner"
+                        android:layout_height="100dp"/>
+                </LinearLayout>
+            </RelativeLayout>
+
+        </ScrollView>
+
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/go_dashboard"
+            android:layout_margin="@dimen/thirty_dp"
+            android:layout_alignParentBottom="true"
+            android:text="Go to dashboard"
+            android:background="@color/app_color"
+            />
+
+    </RelativeLayout>
+
+
+
+
+</RelativeLayout>
