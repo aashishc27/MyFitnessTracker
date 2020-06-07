@@ -24,6 +24,7 @@ import helper.CommonConstants;
 import helper.DatabaseHelper;
 import helper.TagLayout;
 import helper.Util;
+import models.Calories;
 
 public class DataCollectionActivity extends AppCompatActivity {
     
@@ -69,6 +70,15 @@ public class DataCollectionActivity extends AppCompatActivity {
                     Util.showToast("Values are missing",DataCollectionActivity.this);
                 }
                 else{
+                    Calories calories = Util.calculateCalories(DataCollectionActivity.this,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_goal,selected_activity);
+                    float bmi = Util.calculateBMI(et_weight.getText().toString(),et_height.getText().toString());
+                    String serializedData = calories.serialize();
+
+                    editor.putString(CommonConstants.TOTAL_CAL,serializedData);
+                    editor.putString(CommonConstants.BMI,bmi+"");
+
+                    editor.apply();
+
                     myDb.insertData(user_code,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_activity,selected_food,selected_goal);
                     Intent intent = new Intent(DataCollectionActivity.this,FoodItemSelection.class);
                     intent.putExtra("food_pref",selected_food);
@@ -197,9 +207,6 @@ public class DataCollectionActivity extends AppCompatActivity {
 
         }
 
-        actionBar.setBackButtonDrawable();
-
-
         user_code = sharedPreferences.getString(CommonConstants.USER_CODE,"");
         tg_gender = findViewById(R.id.tl_gender);
         tg_activity = findViewById(R.id.tl_activity);
@@ -233,11 +240,10 @@ public class DataCollectionActivity extends AppCompatActivity {
 
         gender.add(getResources().getString(R.string.tag_male));
         gender.add(getResources().getString(R.string.tag_female));
-        gender.add(getResources().getString(R.string.tag_other));
 
         food_pref.add(getResources().getString(R.string.tag_veg));
         food_pref.add(getResources().getString(R.string.tag_nonveg));
-        food_pref.add(getResources().getString(R.string.tag_egg));
+        food_pref.add(getResources().getString(R.string.tag_both));
 
         fitness_goals.add(getResources().getString(R.string.tag_fat_loss));
         fitness_goals.add(getResources().getString(R.string.tag_muscle_gain));

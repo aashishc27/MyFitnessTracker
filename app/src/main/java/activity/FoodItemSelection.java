@@ -73,12 +73,19 @@ public class FoodItemSelection extends AppCompatActivity {
 
                 carbs = post.getCarbs();
                 fats = post.getFats();
-                for(int i = 0;i<post.getProtein().size();i++){
-                    if(!TextUtils.isEmpty(food_pref)&&food_pref.equalsIgnoreCase(post.getProtein().get(i).getType())){
-                        protein.add(post.getProtein().get(i).getVal());
-                    }
 
+                if(food_pref!=null&&food_pref.equalsIgnoreCase(getResources().getString(R.string.tag_both))){
+                    for(int i = 0;i<post.getProtein().size();i++){
+                            protein.add(post.getProtein().get(i).getVal());
+                    }
+                }else {
+                    for(int i = 0;i<post.getProtein().size();i++){
+                        if(!TextUtils.isEmpty(food_pref)&&food_pref.equalsIgnoreCase(post.getProtein().get(i).getType())){
+                            protein.add(post.getProtein().get(i).getVal());
+                        }
+                    }
                 }
+
 
 
                 System.out.println(post);
@@ -105,20 +112,20 @@ public class FoodItemSelection extends AppCompatActivity {
 
 
     void startFragment(ArrayList<String> product,String type){
-        for(int i = 0;i<product.size();i++){
-            FoodModel foodModel = new FoodModel();
-            foodModel.setName(product.get(i));
+//        for(int i = 0;i<product.size();i++){
+//            FoodModel foodModel = new FoodModel();
+//            foodModel.setName(product.get(i));
+//
+//            food_list.add(foodModel);
+//        }
 
-            food_list.add(foodModel);
-        }
+//        getSupportFragmentManager().beginTransaction()
+//                .replace(R.id.fl_list, Food_RecyclerView_Main.newInstance()).commit();
 
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fl_list, Food_RecyclerView_Main.newInstance()).commit();
-
-//        mFragment = new FoodListFragment(food_list,type,screen);
-//        FragmentManager fragmentManager = getSupportFragmentManager();
-//        fragmentManager.beginTransaction()
-//                .replace(R.id.fl_list, mFragment).commit();
+        mFragment = new FoodListFragment(food_list,type,screen);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction()
+                .replace(R.id.fl_list, mFragment).commit();
 
 
 

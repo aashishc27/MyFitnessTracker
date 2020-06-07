@@ -113,6 +113,7 @@ import java.util.regex.Pattern;
 
 import models.ApplicationStatusModel;
 import models.CallLogModel;
+import models.Calories;
 import models.ContactModel;
 import models.DeviceModel;
 import models.GPSTracker;
@@ -970,6 +971,8 @@ public class Util {
     }
 
 
+
+
     private void turnGPSOff(Activity activity) {
         String provider = Settings.Secure.getString(activity.getContentResolver(), Settings.Secure.LOCATION_PROVIDERS_ALLOWED);
 
@@ -1326,6 +1329,61 @@ public class Util {
 
     }
 
+
+//    1.200 = sedentary (little or no exercise)
+//1.375 = lightly active (light exercise/sports 1-3 days/week)
+//1.550 = moderately active (moderate exercise/sports 3-5 days/week)
+//1.725 = very active (hard exercise/sports 6-7 days a week)
+//1.900 = extra active (very hard exercise/sports and physical job)
+
+   public static Calories calculateCalories(Context mContext,String weight,String height,String age,String gender,String goal,String activity){
+        float calories = 0;
+
+        if(gender.equalsIgnoreCase(mContext.getString(R.string.tag_male))){
+            calories = (float) (88.362 + (13.397 * Integer.parseInt(weight)) + (4.799 *Integer.parseInt(height)) - (5.677*Integer.parseInt(age)));
+        }else if(gender.equalsIgnoreCase(mContext.getString(R.string.tag_female))){
+            calories = (float) (447.593 + (9.247  * Integer.parseInt(weight)) + (3.098 *Integer.parseInt(height)) - (4.330*Integer.parseInt(age)));
+        }
+
+        if(activity.equalsIgnoreCase(mContext.getString(R.string.tag_sedentory))){
+            calories = (float) (calories*1.2);
+        }else if(activity.equalsIgnoreCase(mContext.getString(R.string.tag_light))){
+            calories = (float) (calories*1.37);
+        }else if(activity.equalsIgnoreCase(mContext.getString(R.string.tag_moderate))){
+            calories = (float) (calories*1.55);
+        }else if(activity.equalsIgnoreCase(mContext.getString(R.string.tag_heavy))){
+            calories = (float) (calories*1.72);
+        }
+
+
+
+        if(goal.equalsIgnoreCase(mContext.getString(R.string.tag_fat_loss))){
+            calories = calories-500;
+        }else{
+            calories = calories+500;
+        }
+
+        Calories calories1 = new Calories();
+        calories1.setTotalcalories(calories);
+        calories1.setTotalcarbs((float) (calories*0.35));
+        calories1.setTotalprotein((float) (calories*0.40));
+        calories1.setTotalfat((float) (calories*0.25));
+
+        return calories1;
+    }
+
+      public static Calories create(String serializedData) {
+        // Use GSON to instantiate this class using the JSON representation of the state
+        Gson gson = new Gson();
+        return gson.fromJson(serializedData, Calories.class);
+    }
+
+    public static float calculateBMI(String weight,String height){
+        float bmi = 0.0f;
+        double height_m = Integer.parseInt(height)/100;
+             bmi = (float) (Integer.parseInt(weight) / Math.pow(height_m,2.0));
+        return bmi;
+    }
     public static String getCurrentTime(String auth) {
 
         String localTime = "";

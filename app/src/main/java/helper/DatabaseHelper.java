@@ -30,6 +30,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public static final String COL_8 = "food";
     public static final String COL_9 = "goals";
 
+
     public static final String T2_COL_1 = "protein";
     public static final String T2_COL_2= "carbs";
     public static final String T2_COL_3 = "fats";

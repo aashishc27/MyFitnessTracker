@@ -25,6 +25,7 @@
     <string name="tag_veg">Vegetarian</string>
     <string name="tag_nonveg">Non vegetarian</string>
     <string name="tag_egg">Eggetarian</string>
+    <string name="tag_both">Both</string>
     <string name="name_id_token_activity">IdTokenActivity</string>
 
 

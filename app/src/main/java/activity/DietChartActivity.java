@@ -4,6 +4,10 @@ import android.animation.Animator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -12,6 +16,7 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +28,8 @@ import java.util.ArrayList;
 
 import adapter.MealAdapter;
 import helper.CommonConstants;
+import helper.Util;
+import models.Calories;
 import models.MealModel;
 
 public class DietChartActivity extends AppCompatActivity {
@@ -37,15 +44,64 @@ public class DietChartActivity extends AppCompatActivity {
     RelativeLayout mainView;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
+    private SensorManager mSensorManager;
+    private float mAccel; // acceleration apart from gravity
+    private float mAccelCurrent; // current acceleration including gravity
+    private float mAccelLast; // last acceleration including gravity
+    Calories calories;
+
+
+
+    private final SensorEventListener mSensorListener = new SensorEventListener() {
+
+        public void onSensorChanged(SensorEvent se) {
+            float x = se.values[0];
+            float y = se.values[1];
+            float z = se.values[2];
+            mAccelLast = mAccelCurrent;
+            mAccelCurrent = (float) Math.sqrt((double) (x*x + y*y + z*z));
+            float delta = mAccelCurrent - mAccelLast;
+            mAccel = mAccel * 0.9f + delta; // perform low-cut filter
+
+
+            if (mAccel > 12) {
+                finish();
+                startActivity(getIntent());
+            }
+
+        }
+
+        public void onAccuracyChanged(Sensor sensor, int accuracy) {
+        }
+    };
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        mSensorManager.registerListener(mSensorListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+    }
+
+    @Override
+    protected void onPause() {
+        mSensorManager.unregisterListener(mSensorListener);
+        super.onPause();
+    }
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_diet_chart);
 
+
+        mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        mAccel = 0.00f;
+        mAccelCurrent = SensorManager.GRAVITY_EARTH;
+        mAccelLast = SensorManager.GRAVITY_EARTH;
+
         init();
 
         listener();
+
 
         animation_view.playAnimation();
     }
@@ -63,8 +119,10 @@ public class DietChartActivity extends AppCompatActivity {
 
         animation_view = findViewById(R.id.animationView);
 
-        total_cal.setText("2500 Cal");
-        total_bmi.setText("27.2(Normal Weight)");
+        calories = Util.create(sharedPreferences.getString(CommonConstants.TOTAL_CAL,""));
+
+        total_cal.setText(String.format("%.2f",calories.getTotalcalories())+" Cal");
+        total_bmi.setText(sharedPreferences.getString(CommonConstants.BMI,""));
 
         lv_break = findViewById(R.id.lv_break);
         lv_lunch = findViewById(R.id.lv_lunch);

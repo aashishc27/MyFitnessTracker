@@ -29,6 +29,7 @@
         android:layout_width="70dp"
         android:id="@+id/et1"
         android:layout_height="wrap_content"
+        android:textColor="@color/black"
         android:layout_marginLeft="30dp"
         android:inputType="phone"
         android:textSize="15sp"
@@ -49,6 +50,7 @@
     <EditText
         android:layout_width="70dp"
         android:id="@+id/et2"
+        android:textColor="@color/black"
         android:layout_height="wrap_content"
         android:textSize="15sp"
         android:layout_marginStart="10dp"
