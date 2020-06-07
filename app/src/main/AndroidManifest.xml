@@ -55,6 +55,17 @@
             android:label="@string/name_id_token_activity"
             />
 
+        <activity android:name="test.SetGoalActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+        <activity android:name="test.MainActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme"
+            android:windowSoftInputMode="stateHidden" />
+
+
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             tools:replace="android:value"

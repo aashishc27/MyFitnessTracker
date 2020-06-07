@@ -24,6 +24,7 @@ import fragments.FoodListFragment;
 import helper.DatabaseHelper;
 import models.FoodItemModel;
 import models.FoodModel;
+import test.Food_RecyclerView_Main;
 
 public class FoodItemSelection extends AppCompatActivity {
 
@@ -111,12 +112,13 @@ public class FoodItemSelection extends AppCompatActivity {
             food_list.add(foodModel);
         }
 
+        getSupportFragmentManager().beginTransaction()
+                .replace(R.id.fl_list, Food_RecyclerView_Main.newInstance()).commit();
 
-
-        mFragment = new FoodListFragment(food_list,type,screen);
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction()
-                .replace(R.id.fl_list, mFragment).commit();
+//        mFragment = new FoodListFragment(food_list,type,screen);
+//        FragmentManager fragmentManager = getSupportFragmentManager();
+//        fragmentManager.beginTransaction()
+//                .replace(R.id.fl_list, mFragment).commit();
 
 
 

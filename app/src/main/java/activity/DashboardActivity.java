@@ -1,6 +1,8 @@
 package activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -8,6 +10,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.myfitnesstracker.R;
+
+import test.SetGoalActivity;
 
 public class DashboardActivity extends AppCompatActivity {
 
@@ -22,6 +26,8 @@ public class DashboardActivity extends AppCompatActivity {
 
         init();
 
+        listener();
+
     }
 
     void init(){
@@ -35,5 +41,15 @@ public class DashboardActivity extends AppCompatActivity {
         cal_consumed =findViewById(R.id.cal_consumed);
         step_walked = findViewById(R.id.step_walked);
 
+    }
+
+    void listener(){
+        step_counter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(DashboardActivity.this, SetGoalActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
