@@ -112,12 +112,12 @@ public class FoodItemSelection extends AppCompatActivity {
 
 
     void startFragment(ArrayList<String> product,String type){
-//        for(int i = 0;i<product.size();i++){
-//            FoodModel foodModel = new FoodModel();
-//            foodModel.setName(product.get(i));
-//
-//            food_list.add(foodModel);
-//        }
+        for(int i = 0;i<product.size();i++){
+            FoodModel foodModel = new FoodModel();
+            foodModel.setName(product.get(i));
+
+            food_list.add(foodModel);
+        }
 
 //        getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.fl_list, Food_RecyclerView_Main.newInstance()).commit();
