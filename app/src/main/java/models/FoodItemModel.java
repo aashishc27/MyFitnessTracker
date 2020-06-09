@@ -6,36 +6,33 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 public class FoodItemModel implements Serializable{
-   public ArrayList<String> carbs,fats;
-   public ArrayList<Protein> protein;
+   public ArrayList<FoodList> carbs,fats;
+   public ArrayList<FoodList> protein;
 
     public FoodItemModel() {
     }
 
-    public ArrayList<String> getCarbs() {
+    public ArrayList<FoodList> getCarbs() {
         return carbs;
     }
 
-    public void setCarbs(ArrayList<String> carbs) {
+    public void setCarbs(ArrayList<FoodList> carbs) {
         this.carbs = carbs;
     }
 
-    public ArrayList<String> getFats() {
+    public ArrayList<FoodList> getFats() {
         return fats;
     }
 
-    public void setFats(ArrayList<String> fats) {
+    public void setFats(ArrayList<FoodList> fats) {
         this.fats = fats;
     }
 
-    public ArrayList<Protein> getProtein() {
+    public ArrayList<FoodList> getProtein() {
         return protein;
     }
 
-    public void setProtein(ArrayList<Protein> protein) {
+    public void setProtein(ArrayList<FoodList> protein) {
         this.protein = protein;
     }
-
-
-
 }

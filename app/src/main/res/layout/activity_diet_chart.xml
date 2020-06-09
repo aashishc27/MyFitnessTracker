@@ -100,17 +100,30 @@
                         android:text="-"
                         />
                 </LinearLayout>
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="@dimen/twenty_sp"
                     android:id="@+id/meal_header"
                     android:layout_marginLeft="@dimen/twenty_dp"
                     android:layout_marginTop="@dimen/twenty_dp"
                     android:layout_below="@id/ll_total_steps"
-                    android:textColor="@color/app_color"
-                    android:text="Calculated Meal Plan "
-                    />
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/twenty_sp"
+                        android:textColor="@color/app_color"
+                        android:text="Calculated Meal Plan"
+                        />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:textSize="@dimen/fourteen_sp"
+                        android:textColor="@color/app_color"
+                        android:text="(Shake the device if you want to change generated plan)"
+                        />
+                </LinearLayout>
+
 
 
                 <LinearLayout

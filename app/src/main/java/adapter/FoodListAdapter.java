@@ -17,6 +17,7 @@ import com.example.myfitnesstracker.R;
 
 import java.util.ArrayList;
 
+import models.FoodList;
 import models.FoodModel;
 
 public class FoodListAdapter extends BaseAdapter implements Filterable {
@@ -24,12 +25,12 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
     private Context mContext;
     private TextView tv_suggestion;
     private ListView lv_list;
-    private ArrayList<FoodModel> allProductList;
-    private ArrayList<FoodModel> listToDisplay;
+    private ArrayList<FoodList> allProductList;
+    private ArrayList<FoodList> listToDisplay;
     private ArrayList<String> uncheckList;
     private productFilter mFilter = new productFilter();
 
-    public FoodListAdapter(Context context, ArrayList<FoodModel> productList, ArrayList<String> uncheckList, TextView suggestion, ListView list) {
+    public FoodListAdapter(Context context, ArrayList<FoodList> productList, ArrayList<String> uncheckList, TextView suggestion, ListView list) {
 
         this.mContext = context;
         this.allProductList = productList;
@@ -46,7 +47,7 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
     }
 
     @Override
-    public FoodModel getItem(int position) {
+    public FoodList getItem(int position) {
         return listToDisplay.get(position);
     }
 
@@ -62,13 +63,13 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
             productView = LayoutInflater.from(mContext).inflate(mContext.getResources().getLayout(R.layout.adapter_food_item), parent, false);
         }
 
-        FoodModel currentProduct = getItem(position);
+        FoodList currentProduct = getItem(position);
 
         TextView productName = productView.findViewById(R.id.tv_name);
         CheckBox productPicked = productView.findViewById(R.id.checkBox);
         RelativeLayout ll_main = productView.findViewById(R.id.ll_main);
 
-        productName.setText(currentProduct.getName());
+        productName.setText(currentProduct.getVal());
 
         productPicked.setChecked(currentProduct.isSelected());
 
@@ -84,7 +85,7 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
         if (uncheckList.size() > 0) {
             for (int i = 0; i < listToDisplay.size(); i++) {
                 for (int j = 0; j < uncheckList.size(); j++) {
-                    if (listToDisplay.get(i).getName().contains(uncheckList.get(j))) {
+                    if (listToDisplay.get(i).getVal().contains(uncheckList.get(j))) {
                         if (listToDisplay.get(i).isSelected()) {
                             listToDisplay.get(i).setSelected(false);
                         }
@@ -109,7 +110,7 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
         //notifyDataSetChanged();
     }
 
-    public FoodModel getFilteredList(int position) {
+    public FoodList getFilteredList(int position) {
         return listToDisplay.get(position);
     }
 
@@ -128,9 +129,9 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
 
             } else {
 
-                ArrayList<FoodModel> nListToDisplay = new ArrayList<>();
-                for (FoodModel p : allProductList) {
-                    if (p.getName().toUpperCase().startsWith(constraint.toString().toUpperCase()))
+                ArrayList<FoodList> nListToDisplay = new ArrayList<>();
+                for (FoodList p : allProductList) {
+                    if (p.getVal().toUpperCase().startsWith(constraint.toString().toUpperCase()))
                         nListToDisplay.add(p);
                 }
 
@@ -150,7 +151,7 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
 
             if (results.count == allProductList.size() + 1) {
 
-                listToDisplay = (ArrayList<FoodModel>) results.values;
+                listToDisplay = (ArrayList<FoodList>) results.values;
 
                 tv_suggestion.setVisibility(View.GONE);
 
@@ -158,7 +159,7 @@ public class FoodListAdapter extends BaseAdapter implements Filterable {
                 tv_suggestion.setVisibility(View.GONE);
                 listToDisplay.clear();
             } else {
-                listToDisplay = (ArrayList<FoodModel>) results.values;
+                listToDisplay = (ArrayList<FoodList>) results.values;
                 tv_suggestion.setVisibility(View.VISIBLE);
             }
 

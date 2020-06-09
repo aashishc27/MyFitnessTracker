@@ -97,6 +97,55 @@
         android:layout_centerInParent="true"
         android:layout_below="@+id/seprator"
         />
+    <RelativeLayout
+        android:id="@+id/seprator_2"
+        android:layout_below="@+id/sign_in_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical|center_horizontal"
+        android:layout_marginTop="@dimen/thirty_dp"
+        android:layout_marginBottom="@dimen/thirty_dp">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/five_dp"
+            android:layout_marginRight="@dimen/twenty_dp"
+            android:layout_toRightOf="@+id/orText_2"
+            android:background="@color/dialog_head" />
+
+        <TextView
+            android:id="@+id/orText_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:text="OR"
+            android:textColor="@color/dialog_head"
+            android:textSize="@dimen/fifteen_sp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="1dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/twenty_dp"
+            android:layout_marginRight="@dimen/five_dp"
+            android:layout_toLeftOf="@+id/orText_2"
+            android:background="@color/dialog_head" />
+    </RelativeLayout>
+<Button
+    android:layout_width="wrap_content"
+    android:background="@color/app_color"
+    android:id="@+id/bt_guest"
+    android:textColor="@color/white"
+    android:text="Sign in as guest"
+    android:padding="@dimen/ten_dp"
+    android:textAllCaps="false"
+    android:layout_centerInParent="true"
+    android:layout_below="@+id/seprator_2"
+    android:layout_height="wrap_content"/>
+
 
 
 </RelativeLayout>

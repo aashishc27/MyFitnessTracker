@@ -27,6 +27,7 @@
     <string name="tag_egg">Eggetarian</string>
     <string name="tag_both">Both</string>
     <string name="name_id_token_activity">IdTokenActivity</string>
+    <string name="api_key_food">QF9qUeCLGCcn1NkCTEgNGXaKxQ1QA6QdageJqYKi</string>
 
 
     <!-- TODO(user): replace with your real server client ID -->

@@ -12,6 +12,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     GoogleApiClient mGoogleApiClient;
     private LoginButton loginButton;
     private CallbackManager callbackManager;
-
+    Button bt_guest;
     SharedPreferences sharedPreferences;
     private FirebaseAuth mAuth;
     SharedPreferences.Editor editor;
@@ -120,6 +121,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         actionBar.setLeftTitle("Login");
 
+        bt_guest = findViewById(R.id.bt_guest);
+
         callbackManager = CallbackManager.Factory.create();
         loginButton = (LoginButton) findViewById(R.id.loginButton);
 
@@ -129,7 +132,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        //findViewById(R.id.sign_out).setOnClickListener(this);
+
+        findViewById(R.id.bt_guest).setOnClickListener(this);
         loginButton.setReadPermissions("user_friends");
         loginButton.setReadPermissions("public_profile");
         loginButton.setReadPermissions("email");
@@ -267,10 +271,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 signIn();
                 break;
             }
-//            case R.id.sign_out: {
-//                signOut();
-//                break;
-//            }
+            case R.id.bt_guest: {
+                openCollectData();
+                break;
+            }
         }
     }
 

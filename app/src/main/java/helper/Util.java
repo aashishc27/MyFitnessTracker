@@ -116,6 +116,7 @@ import models.CallLogModel;
 import models.Calories;
 import models.ContactModel;
 import models.DeviceModel;
+import models.FoodList;
 import models.GPSTracker;
 import models.LocationModel;
 
@@ -1380,7 +1381,7 @@ public class Util {
 
     public static float calculateBMI(String weight,String height){
         float bmi = 0.0f;
-        double height_m = Integer.parseInt(height)/100;
+        float height_m = (float)Integer.parseInt(height)/100;
              bmi = (float) (Integer.parseInt(weight) / Math.pow(height_m,2.0));
         return bmi;
     }

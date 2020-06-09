@@ -29,6 +29,7 @@ import activity.FoodItemSelection;
 import adapter.FoodListAdapter;
 import helper.CommonConstants;
 import helper.Util;
+import models.FoodList;
 import models.FoodModel;
 
 public class FoodListFragment extends Fragment {
@@ -37,10 +38,10 @@ public class FoodListFragment extends Fragment {
     TextView tv_food_header;
     FoodListAdapter foodListAdapter;
     String type;
-    ArrayList<FoodModel> garbageProduct = new ArrayList<>();
-    ArrayList<FoodModel> productListToSend = new ArrayList<>();
+    ArrayList<FoodList> garbageProduct = new ArrayList<>();
+    ArrayList<FoodList> productListToSend = new ArrayList<>();
     ArrayList<String> uncheckproductList,food_name;
-    ArrayList<FoodModel> productList, selectedproductList,productListSelected;
+    ArrayList<FoodList> productList, selectedproductList,productListSelected;
     Button submit;
     int screen ;
 
@@ -48,7 +49,7 @@ public class FoodListFragment extends Fragment {
     SharedPreferences.Editor editor;
 
 
-    public FoodListFragment(ArrayList<FoodModel> productList,String type,int screen) {
+    public FoodListFragment(ArrayList<FoodList> productList,String type,int screen) {
         this.productList = productList;
         this.type = type;
         this.screen = screen;
@@ -67,14 +68,14 @@ public class FoodListFragment extends Fragment {
         }else if(screen ==3){
             json = sharedPreferences.getString(CommonConstants.SELCTED_FATS, "");
         }
-        Type type = new TypeToken<ArrayList<FoodModel>>(){}.getType();
+        Type type = new TypeToken<ArrayList<FoodList>>(){}.getType();
 
-        ArrayList<FoodModel> selectedList = gson.fromJson(json, type);
+        ArrayList<FoodList> selectedList = gson.fromJson(json, type);
 
         if(selectedList != null){
             for(int i = 0;i<productList.size();i++){
                 for(int j = 0;j<selectedList.size();j++){
-                    if(selectedList.get(j).getName().equalsIgnoreCase(productList.get(i).getName())){
+                    if(selectedList.get(j).getVal().equalsIgnoreCase(productList.get(i).getVal())){
                         productList.get(i).setSelected(true);
                     }
                 }
@@ -83,11 +84,14 @@ public class FoodListFragment extends Fragment {
 
         for(int i = 0;i<productList.size();i++){
             if(productList.get(i).isSelected()){
-                FoodModel foodModel =new FoodModel();
-                foodModel.setName(productList.get(i).getName());
-                foodModel.setSelected(productList.get(i).isSelected());
+                FoodList foodList =new FoodList();
+                foodList.setVal(productList.get(i).getVal());
+                foodList.setPref1(productList.get(i).getPref1());
+                foodList.setPref2(productList.get(i).getPref2());
+                foodList.setType(productList.get(i).getType());
+                foodList.setSelected(productList.get(i).isSelected());
 
-                selectedproductList.add(foodModel);
+                selectedproductList.add(foodList);
             }
         }
 
@@ -136,7 +140,7 @@ public class FoodListFragment extends Fragment {
 
         lv_food.setOnItemClickListener((parent, view, position, id) -> {
 
-            FoodModel itemObject = foodListAdapter.getItem(position);
+            FoodList itemObject = foodListAdapter.getItem(position);
 
             // Translate the selected item to DTO object.
 //                UpdatedBankListModel itemDto = (UpdatedBankListModel)itemObject;
@@ -156,8 +160,8 @@ public class FoodListFragment extends Fragment {
                 productName.setTextColor(this.getResources().getColor(R.color.default_partner_color));
                 itemObject.setSelected(false);
                 foodListAdapter.setSelectedIndex(position, false);
-                for (FoodModel product : selectedproductList) {
-                    if (product.getName().trim().equalsIgnoreCase(foodListAdapter.getFilteredList(position).getName().trim())) {
+                for (FoodList product : selectedproductList) {
+                    if (product.getVal().trim().equalsIgnoreCase(foodListAdapter.getFilteredList(position).getVal().trim())) {
                         garbageProduct.add(product);
                         // productListAdapter.getFilteredList(position).setIs_picked(false);
                         // productListAdapter.getFilteredList(position).setSelected(false);
@@ -176,8 +180,8 @@ public class FoodListFragment extends Fragment {
                 productName.setTextColor(this.getResources().getColor(R.color.white));
                 itemObject.setSelected(true);
                 foodListAdapter.setSelectedIndex(position, true);
-                for (FoodModel product : selectedproductList) {
-                    if (product.getName().trim().equalsIgnoreCase(itemObject.getName()))
+                for (FoodList product : selectedproductList) {
+                    if (product.getVal().trim().equalsIgnoreCase(itemObject.getVal()))
                         add = false;
                 }
                 if (add) selectedproductList.add(foodListAdapter.getFilteredList(position));

@@ -90,7 +90,7 @@ public class SplashActivity extends AppCompatActivity {
                     editor.apply();
 
                     //SplashActivity.this
-                    Intent intent = new Intent(SplashActivity.this, DataCollectionActivity.class);
+                    Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     startActivity(intent);
                     finish();
@@ -112,7 +112,7 @@ public class SplashActivity extends AppCompatActivity {
                         }else{
 
                             //complete form
-                            Intent intent = new Intent(SplashActivity.this, DataCollectionActivity.class);
+                            Intent intent = new Intent(SplashActivity.this, DietChartActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
@@ -120,7 +120,7 @@ public class SplashActivity extends AppCompatActivity {
                         }
 
                     } else {
-                        Intent intent = new Intent(SplashActivity.this, DataCollectionActivity.class);
+                        Intent intent = new Intent(SplashActivity.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();

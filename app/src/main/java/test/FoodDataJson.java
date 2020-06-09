@@ -16,7 +16,7 @@ import java.util.Map;
  * Created by maddi on 3/29/2016.
  */
 public class FoodDataJson {
-    List<Map<String, ?>> foodList;
+    public List<Map<String, ?>> foodList;
     public TextView t;
 
     public List<Map<String, ?>> getMoviesList() {

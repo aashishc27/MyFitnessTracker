@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import fragments.FoodListFragment;
 import helper.DatabaseHelper;
 import models.FoodItemModel;
+import models.FoodList;
 import models.FoodModel;
 import test.Food_RecyclerView_Main;
 
@@ -30,6 +31,7 @@ public class FoodItemSelection extends AppCompatActivity {
 
     Fragment mFragment ;
     ArrayList<String> carbs,fats,protein;
+    ArrayList<FoodList> carb_1,fats_1,protein_1;
     ArrayList<FoodModel> food_list;
     ActionBar actionBar;
     String food_pref;
@@ -57,6 +59,13 @@ public class FoodItemSelection extends AppCompatActivity {
 
         protein = new ArrayList<>();
 
+        carb_1 = new ArrayList<>();
+        fats_1 = new ArrayList<>();
+        protein_1 = new ArrayList<>();
+
+        carbs = new ArrayList<>();
+        fats = new ArrayList<>();
+
         myDb = new DatabaseHelper(this);
 
 
@@ -71,17 +80,21 @@ public class FoodItemSelection extends AppCompatActivity {
 
                 FoodItemModel post = dataSnapshot.getValue(FoodItemModel.class);
 
-                carbs = post.getCarbs();
-                fats = post.getFats();
+                carb_1 = post.getCarbs();
+                fats_1  = post.getFats();
+
+
 
                 if(food_pref!=null&&food_pref.equalsIgnoreCase(getResources().getString(R.string.tag_both))){
                     for(int i = 0;i<post.getProtein().size();i++){
-                            protein.add(post.getProtein().get(i).getVal());
+                        FoodList item = post.getProtein().get(i);
+                        protein_1.add(item);
                     }
                 }else {
-                    for(int i = 0;i<post.getProtein().size();i++){
-                        if(!TextUtils.isEmpty(food_pref)&&food_pref.equalsIgnoreCase(post.getProtein().get(i).getType())){
-                            protein.add(post.getProtein().get(i).getVal());
+                    for(int j = 0;j<post.getProtein().size();j++){
+                        if(!TextUtils.isEmpty(food_pref)&&food_pref.equalsIgnoreCase(post.getProtein().get(j).getType())){
+                            FoodList item = post.getProtein().get(j);
+                            protein_1.add(item);
                         }
                     }
                 }
@@ -91,11 +104,11 @@ public class FoodItemSelection extends AppCompatActivity {
                 System.out.println(post);
 
                 if(screen == 1){
-                    startFragment(protein,"Protein");
+                    startFragment(protein_1,"Protein");
                 }else if(screen == 2){
-                    startFragment(carbs,"Carbs");
+                    startFragment(carb_1,"Carbs");
                 }else if(screen == 3){
-                    startFragment(fats,"Fats");
+                    startFragment(fats_1,"Fats");
                 }  else{
                     finish();
                 }
@@ -111,18 +124,11 @@ public class FoodItemSelection extends AppCompatActivity {
 
 
 
-    void startFragment(ArrayList<String> product,String type){
-        for(int i = 0;i<product.size();i++){
-            FoodModel foodModel = new FoodModel();
-            foodModel.setName(product.get(i));
-
-            food_list.add(foodModel);
-        }
-
+    void startFragment(ArrayList<FoodList> product,String type){
 //        getSupportFragmentManager().beginTransaction()
 //                .replace(R.id.fl_list, Food_RecyclerView_Main.newInstance()).commit();
 
-        mFragment = new FoodListFragment(food_list,type,screen);
+        mFragment = new FoodListFragment(product,type,screen);
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction()
                 .replace(R.id.fl_list, mFragment).commit();
