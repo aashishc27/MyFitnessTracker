@@ -10,6 +10,7 @@ import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -44,10 +45,13 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Random;
 
 import adapter.MealAdapter;
 import helper.CommonConstants;
+import helper.ExpandableCardView;
 import helper.Util;
 import models.Calories;
 import models.FoodApiModel;
@@ -77,7 +81,8 @@ public class DietChartActivity extends AppCompatActivity {
     Calories calories;
     static FoodDataJson foodData;
     ArrayList<FoodList> selected_protein, selected_carbs, selected_fats;
-
+    ExpandableCardView meal_1,meal_2,meal_3;
+    List<Integer> meals;
     ArrayList<String> break_food, lunch_food, dinner_food;
 
     private final SensorEventListener mSensorListener = new SensorEventListener() {
@@ -134,6 +139,10 @@ public class DietChartActivity extends AppCompatActivity {
 
 
         animation_view.playAnimation();
+
+        openCollapse();
+
+
     }
 
 
@@ -164,6 +173,19 @@ public class DietChartActivity extends AppCompatActivity {
         dinner_food = new ArrayList<>();
 
         Gson gson = new Gson();
+
+        meals = new ArrayList<>();
+        meals.add(1);
+        meals.add(2);
+        meals.add(3);
+
+
+
+
+
+        meal_1 = findViewById(R.id.main_meal_1);
+        meal_2 = findViewById(R.id.main_meal_2);
+        meal_3 = findViewById(R.id.main_meal_3);
 
 
         TypeToken<ArrayList<FoodList>> token = new TypeToken<ArrayList<FoodList>>() {
@@ -304,6 +326,19 @@ public class DietChartActivity extends AppCompatActivity {
             public void onAnimationEnd(Animator animation) {
                 mainView.setVisibility(View.VISIBLE);
                 animation_view.setVisibility(View.GONE);
+                switch (getRandomElement(meals)){
+
+                    case 1:
+                        new Handler().postDelayed(() -> meal_1.expand(), 100);
+                        break;
+                    case 2:
+                        new Handler().postDelayed(() -> meal_2.expand(), 100);
+                        break;
+                    case 3:
+                        new Handler().postDelayed(() -> meal_3.expand(), 100);
+                        break;
+
+                }
             }
 
             @Override
@@ -417,7 +452,65 @@ public class DietChartActivity extends AppCompatActivity {
                     return Float.compare(o2.getProtein(), o1.getProtein());
                 }
             });
+
         }
+    }
+
+    void openCollapse(){
+        try {
+
+            meal_1.setOnExpandedListener((v, isExpanded) -> {
+
+                if (isExpanded) {
+                    new Handler().postDelayed(() -> {
+                        if(meal_2.isExpanded()){
+                            meal_2.collapse();
+                        }
+                        if(meal_3.isExpanded()){
+                            meal_3.collapse();
+                        }
+                    }, 100);
+                }
+            });
+
+
+            meal_2.setOnExpandedListener((v, isExpanded) -> {
+
+                if (isExpanded) {
+                    new Handler().postDelayed(() -> {
+                        if(meal_1.isExpanded()){
+                            meal_1.collapse();
+                        }
+                        if(meal_3.isExpanded()){
+                            meal_3.collapse();
+                        }
+                    }, 100);
+                }
+            });
+
+            meal_3.setOnExpandedListener((v, isExpanded) -> {
+
+                if (isExpanded) {
+                    new Handler().postDelayed(() -> {
+                        if(meal_2.isExpanded()){
+                            meal_2.collapse();
+                        }
+                        if(meal_1.isExpanded()){
+                            meal_1.collapse();
+                        }
+                    }, 100);
+                }
+            });
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public int getRandomElement(List<Integer> list)
+    {
+        Random rand = new Random();
+        return list.get(rand.nextInt(list.size()));
     }
 
 }

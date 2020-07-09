@@ -90,6 +90,7 @@ public class FoodListFragment extends Fragment {
                 foodList.setPref2(productList.get(i).getPref2());
                 foodList.setType(productList.get(i).getType());
                 foodList.setSelected(productList.get(i).isSelected());
+                foodList.setCalories(productList.get(i).getCalories());
 
                 selectedproductList.add(foodList);
             }

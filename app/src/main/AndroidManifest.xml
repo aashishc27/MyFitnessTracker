@@ -65,7 +65,11 @@
             android:theme="@style/ActivityTheme"
             android:windowSoftInputMode="stateHidden" />
 
-
+        <activity android:name="activity.TestExpandView"
+            android:screenOrientation="portrait"
+            android:theme="@style/ActivityTheme"
+            android:windowSoftInputMode="stateHidden"
+            />
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"
             tools:replace="android:value"

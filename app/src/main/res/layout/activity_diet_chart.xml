@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_marginRight="-2dp" />
 
-        <ScrollView
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_below="@+id/action_bar"
             android:fillViewport="true"
@@ -119,6 +119,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:textSize="@dimen/fourteen_sp"
+                        android:visibility="gone"
                         android:textColor="@color/app_color"
                         android:text="(Shake the device if you want to change generated plan)"
                         />
@@ -128,73 +129,57 @@
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:id="@+id/ll_break"
-                    android:layout_marginRight="@dimen/twenty_dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
                     android:layout_below="@+id/meal_header"
-                    android:layout_marginLeft="@dimen/twenty_dp"
-                    android:layout_marginTop="@dimen/twenty_dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textStyle="bold"
-                        android:textSize="@dimen/sixteen_sp"
-                        android:textColor="@color/app_color"
-                        android:text="Breakfast"
-                        />
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:id="@+id/lv_break"
-                        android:layout_height="100dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:paddingBottom="20dp"
                     android:orientation="vertical"
-                    android:id="@+id/ll_lunch"
-                    android:layout_below="@+id/ll_break"
-                    android:layout_marginRight="@dimen/twenty_dp"
-                    android:layout_marginLeft="@dimen/twenty_dp"
-                    android:layout_marginTop="@dimen/ten_dp"
-                    android:layout_height="wrap_content">
-                    <TextView
+                    android:background="@color/white"
+                    >
+
+
+                    <helper.ExpandableCardView
+                        android:id="@+id/main_meal_1"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sixteen_sp"
-                        android:textColor="@color/app_color"
-                        android:textStyle="bold"
-                        android:text="Lunch"
-                        />
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:id="@+id/lv_lunch"
-                        android:layout_height="100dp"/>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="vertical"
-                    android:id="@+id/ll_dinner"
-                    android:layout_below="@+id/ll_lunch"
-                    android:layout_marginRight="@dimen/twenty_dp"
-                    android:layout_marginLeft="@dimen/twenty_dp"
-                    android:layout_marginTop="@dimen/ten_dp"
-                    android:layout_height="wrap_content">
-                    <TextView
+                        app:title="Meal Plan 1"
+                        app:inner_view="@layout/meal_plan_layout"
+                        app:expandOnClick="true" />
+
+                    <helper.ExpandableCardView
+                        android:id="@+id/main_meal_2"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="@dimen/sixteen_sp"
-                        android:textColor="@color/app_color"
-                        android:text="Dinner"
-                        android:textStyle="bold"
+                        app:title="Meal Plan 2"
+                        app:inner_view="@layout/meal_plan_layout"
+                        app:expandOnClick="true"/>
+
+                    <helper.ExpandableCardView
+                        android:id="@+id/main_meal_3"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:title="Meal Plan 3"
+                        app:inner_view="@layout/meal_plan_layout"
+                        app:expandOnClick="true"
                         />
-                    <ListView
-                        android:layout_width="match_parent"
-                        android:id="@+id/lv_dinner"
-                        android:layout_height="100dp"/>
+
                 </LinearLayout>
+
             </RelativeLayout>
 
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
         <Button
             android:layout_width="match_parent"

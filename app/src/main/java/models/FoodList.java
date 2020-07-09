@@ -6,7 +6,15 @@ public class FoodList implements Serializable {
 
    private String pref1,pref2,type,val;
    private boolean isSelected ;
+   private int calories;
 
+    public int getCalories() {
+        return calories;
+    }
+
+    public void setCalories(int calories) {
+        this.calories = calories;
+    }
 
     public boolean isSelected() {
         return isSelected;
