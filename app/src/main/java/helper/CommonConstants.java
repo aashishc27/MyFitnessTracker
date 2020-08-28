@@ -38,7 +38,7 @@ public class CommonConstants {
 
 
 
-    public static final String STARTTIME = "STARTTIME";
+    public static final String GOAL = "GOAL";
     public static final String ENDTIME = "ENDTIME";
     public static final String EXPIRETIME = "EXPIRETIME";
 

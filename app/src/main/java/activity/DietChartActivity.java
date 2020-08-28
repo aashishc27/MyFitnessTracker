@@ -84,6 +84,7 @@ public class DietChartActivity extends AppCompatActivity {
     ExpandableCardView meal_1,meal_2,meal_3;
     List<Integer> meals;
     ArrayList<String> break_food, lunch_food, dinner_food;
+    String goals;
 
     private final SensorEventListener mSensorListener = new SensorEventListener() {
 
@@ -180,12 +181,10 @@ public class DietChartActivity extends AppCompatActivity {
         meals.add(3);
 
 
-
-
-
         meal_1 = findViewById(R.id.main_meal_1);
         meal_2 = findViewById(R.id.main_meal_2);
         meal_3 = findViewById(R.id.main_meal_3);
+
 
 
         TypeToken<ArrayList<FoodList>> token = new TypeToken<ArrayList<FoodList>>() {

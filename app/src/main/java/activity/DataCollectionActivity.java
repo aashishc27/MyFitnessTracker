@@ -73,10 +73,9 @@ public class DataCollectionActivity extends AppCompatActivity {
                     Calories calories = Util.calculateCalories(DataCollectionActivity.this,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_goal,selected_activity);
                     float bmi = Util.calculateBMI(et_weight.getText().toString(),et_height.getText().toString());
                     String serializedData = calories.serialize();
-
                     editor.putString(CommonConstants.TOTAL_CAL,serializedData);
                     editor.putString(CommonConstants.BMI,bmi+"");
-
+                    editor.putString(CommonConstants.GOAL,selected_goal);
                     editor.apply();
 
                     myDb.insertData(user_code,et_weight.getText().toString(),et_height.getText().toString(),et_age.getText().toString(),selected_gender,selected_activity,selected_food,selected_goal);
@@ -398,6 +397,7 @@ public class DataCollectionActivity extends AppCompatActivity {
                             selected = tv.getText().toString();
                             tv.setTextColor(getResources().getColor(R.color.white));
                             selected_goal = selected;
+
 
                         }
                     }
