@@ -39,6 +39,7 @@
             android:screenOrientation="portrait"
             android:theme="@style/ActivityTheme"
             android:windowDisablePreview="true"
+            android:noHistory="true"
             android:windowSoftInputMode="adjustResize" />
 
         <activity android:name="activity.DataCollectionActivity"

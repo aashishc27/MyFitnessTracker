@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:background="@color/loan_offer_separator"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
@@ -21,10 +21,82 @@
             android:textColor="@color/app_color"
             android:text="Breakfast"
             />
-        <ListView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/lv_break"
-            android:layout_height="100dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Chicken"
+                android:layout_marginBottom="@dimen/ten_dp"
+                android:id="@+id/food_name_protein_break"
+                android:textColor="@color/app_color_dark"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_protein_break"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Chicken"
+                android:layout_marginBottom="@dimen/ten_dp"
+                android:id="@+id/food_name_carb_break"
+                android:textColor="@color/app_color_dark"
+                android:layout_height="wrap_content"
+                />
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_carb_break"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Chicken"
+                android:layout_marginBottom="@dimen/ten_dp"
+                android:id="@+id/food_name_fat_break"
+                android:textColor="@color/app_color_dark"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_fat_break"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,10 +115,110 @@
             android:textStyle="bold"
             android:text="Lunch"
             />
-        <ListView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/lv_lunch"
-            android:layout_height="100dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Chicken"
+                    android:id="@+id/food_name_protein_lunch"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_protein_lunch"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Chicken"
+                    android:id="@+id/food_name_carb_lunch"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_carb_lunch"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Chicken"
+                    android:id="@+id/food_name_fat_lunch"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_fat_lunch"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
@@ -65,10 +237,99 @@
             android:text="Dinner"
             android:textStyle="bold"
             />
-        <ListView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:id="@+id/lv_dinner"
-            android:layout_height="100dp"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/ten_dp"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Chicken"
+                    android:id="@+id/food_name_protein_dinner"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_protein_dinner"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:text="Chicken"
+                    android:id="@+id/food_name_carb_dinner"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:textColor="@color/app_color_dark"
+                    android:layout_height="wrap_content"
+                    />
+            </LinearLayout>
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_carb_dinner"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:text="Chicken"
+                android:id="@+id/food_name_fat_dinner"
+                android:textColor="@color/app_color_dark"
+                android:layout_height="wrap_content"
+                />
+
+            <TextView
+                android:layout_width="0dp"
+                android:id="@+id/calories_fat_dinner"
+                android:layout_weight="1"
+                android:layout_gravity="center"
+                android:gravity="right"
+                android:layout_height="wrap_content"
+                android:textColor="@color/app_color_dark"
+                android:text="200 cal"
+                />
+
+        </LinearLayout>
     </LinearLayout>
 
 </RelativeLayout>

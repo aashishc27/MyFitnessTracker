@@ -14,12 +14,13 @@ import com.example.myfitnesstracker.R;
 import java.util.ArrayList;
 
 import models.MealModel;
+import models.Results;
 
 public class MealAdapter extends BaseAdapter {
-    ArrayList<MealModel> mealModelList;
+    ArrayList<Results> mealModelList;
     Context context;
 
-    public MealAdapter(Context context, ArrayList<MealModel> mealModelList) {
+    public MealAdapter(Context context, ArrayList<Results> mealModelList) {
 
         this.mealModelList  = mealModelList;
         this.context = context;
@@ -53,11 +54,12 @@ public class MealAdapter extends BaseAdapter {
         }
 
 
-        MealModel currentItem = (MealModel) getItem(position);
+        Results currentItem = (Results) getItem(position);
 
-        viewHolder.food_name.setText(currentItem.getName());
-        viewHolder.calories.setText(currentItem.getCalories());
-        viewHolder.portion_size.setText(currentItem.getPotion_size());
+
+//        viewHolder.food_name.setText(currentItem.getName());
+//        viewHolder.calories.setText(currentItem.getCalories());
+//        viewHolder.portion_size.setText(currentItem.getPotion_size());
 
         return convertView;
     }

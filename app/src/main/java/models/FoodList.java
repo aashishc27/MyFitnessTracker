@@ -1,8 +1,9 @@
 package models;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
-public class FoodList implements Serializable {
+public class FoodList implements Serializable, Comparator {
 
    private String pref1,pref2,type,val;
    private boolean isSelected ;
@@ -54,5 +55,11 @@ public class FoodList implements Serializable {
 
     public void setVal(String val) {
         this.val = val;
+    }
+
+    @Override
+    public int compare(Object o, Object t1) {
+
+        return 0;
     }
 }

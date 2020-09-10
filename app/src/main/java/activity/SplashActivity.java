@@ -103,9 +103,9 @@ public class SplashActivity extends AppCompatActivity {
 
                     if (isLoggedIn) {
 
-                        if(sharedPreferences.getBoolean(CommonConstants.PLAN_GENERATED,false)){
+                        if(sharedPreferences.getBoolean("editorClicked",false)){
                             //open dashboard
-                            Intent intent = new Intent(SplashActivity.this, DashboardActivity.class);
+                            Intent intent = new Intent(SplashActivity.this, DataCollectionActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
                             finish();
@@ -114,6 +114,7 @@ public class SplashActivity extends AppCompatActivity {
                             //complete form
                             Intent intent = new Intent(SplashActivity.this, DietChartActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            intent.putExtra("fromSplash",true);
                             startActivity(intent);
                             finish();
 
